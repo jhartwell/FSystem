@@ -15,7 +15,7 @@ namespace FSystem.Common
                 while (!reader.EndOfStream)
                 {
                     string[] fields = reader.ReadLine().Split(deliminter);
-                    records.Add(new Record(fields[0], fields[1], fields[2], fields[3]));
+                    records.Add(new Record(fields[1], fields[0], fields[2], fields[3]));
                 }
             }
             return records;

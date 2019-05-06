@@ -6,8 +6,8 @@ namespace FSystem.Common.Interfaces
 {
     public interface IInputService
     {
-        IEnumerable<IRecord> GetPipeDelimitedRecords();
-        IEnumerable<IRecord> GetSpaceDelimitedRecords();
-        IEnumerable<IRecord> GetCommaDelimitedRecords();
+        IEnumerable<IRecord> GetPipeDelimitedRecords(Stream input);
+        IEnumerable<IRecord> GetSpaceDelimitedRecords(Stream input);
+        IEnumerable<IRecord> GetCommaDelimitedRecords(Stream input);
     }
 }
