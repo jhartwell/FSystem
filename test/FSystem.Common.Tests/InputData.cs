@@ -14,11 +14,11 @@ namespace FSystem.Common.Tests
         {
             records = new List<string[]>()
             {
-                new[] {"Scott", "Michael", "Blue", "5/11/2000"},
-                new[] {"Malone", "Kevin", "Red", "1/23/1948"},
-                new[] {"Martinez", "Oscar", "Green", "12/3/1982"},
-                new[] {"Halpert", "Jim", "Maroon", "3/4/1973"},
-                new[] {"Beasley", "Pam", "Purple", "7/1/1976"}
+                new[] {"Scott", "Michael", "Male", "Blue", "5/11/2000"},
+                new[] {"Malone", "Kevin", "Male", "Red", "1/23/1948"},
+                new[] {"Martinez", "Oscar", "Male", "Green", "12/3/1982"},
+                new[] {"Halpert", "Jim", "Male", "Maroon", "3/4/1973"},
+                new[] {"Beasley", "Pam", "Female", "Purple", "7/1/1976"}
             };
         }
 

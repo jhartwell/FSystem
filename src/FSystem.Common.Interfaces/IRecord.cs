@@ -5,6 +5,7 @@ namespace FSystem.Common.Interfaces
     {
         string FirstName { get; }
         string LastName { get; }
+        string Gender { get; }
         string FavoriteColor { get; }
         string DateOfBirth { get; }
     }

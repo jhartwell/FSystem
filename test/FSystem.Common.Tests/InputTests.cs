@@ -3,12 +3,17 @@ using System.Linq;
 using FSystem.Common.Interfaces;
 using Xunit;
 
+/*
+ * TODO: Use reflection on IRecord interface to get number of
+ * properties so if properties are added to the interface 
+ * we don't have to manually change the tests
+ */
 namespace FSystem.Common.Tests
 {
     public class InputTests
     {
         private InputData inputData;
-
+        private const int expectedRecordFieldCount = 5;
         public InputTests()
         {
             inputData = new InputData();
@@ -27,12 +32,13 @@ namespace FSystem.Common.Tests
             Assert.NotNull(firstRecord);
 
             var fields = rawString.Split(',');
-            Assert.Equal(4, fields.Length);
+            Assert.Equal(expectedRecordFieldCount, fields.Length);
 
             Assert.Equal(fields[0], firstRecord.LastName);
             Assert.Equal(fields[1], firstRecord.FirstName);
-            Assert.Equal(fields[2], firstRecord.FavoriteColor);
-            Assert.Equal(fields[3], firstRecord.DateOfBirth);
+            Assert.Equal(fields[2], firstRecord.Gender);
+            Assert.Equal(fields[3], firstRecord.FavoriteColor);
+            Assert.Equal(fields[4], firstRecord.DateOfBirth);
 
         }
 
@@ -45,16 +51,17 @@ namespace FSystem.Common.Tests
             Assert.NotNull(records);
             Assert.NotEmpty(records);
 
-            var firstRecord = records.FirstOrDefault();
+            IRecord firstRecord = records.FirstOrDefault();
             Assert.NotNull(firstRecord);
 
-            var fields = rawString.Split('|');
-            Assert.Equal(4, fields.Length);
+            var fields = rawString.Split('|');        
+            Assert.Equal(expectedRecordFieldCount, fields.Length);
 
             Assert.Equal(fields[0], firstRecord.LastName);
             Assert.Equal(fields[1], firstRecord.FirstName);
-            Assert.Equal(fields[2], firstRecord.FavoriteColor);
-            Assert.Equal(fields[3], firstRecord.DateOfBirth);
+            Assert.Equal(fields[2], firstRecord.Gender);
+            Assert.Equal(fields[3], firstRecord.FavoriteColor);
+            Assert.Equal(fields[4], firstRecord.DateOfBirth);
         }
 
         [Fact]
@@ -70,12 +77,13 @@ namespace FSystem.Common.Tests
             Assert.NotNull(firstRecord);
 
             var fields = rawString.Split(' ');
-            Assert.Equal(4, fields.Length);
+            Assert.Equal(expectedRecordFieldCount, fields.Length);
 
             Assert.Equal(fields[0], firstRecord.LastName);
             Assert.Equal(fields[1], firstRecord.FirstName);
-            Assert.Equal(fields[2], firstRecord.FavoriteColor);
-            Assert.Equal(fields[3], firstRecord.DateOfBirth);
+            Assert.Equal(fields[2], firstRecord.Gender);
+            Assert.Equal(fields[3], firstRecord.FavoriteColor);
+            Assert.Equal(fields[4], firstRecord.DateOfBirth);
         }
     }
 }
