@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Class1.cs" />
+    <Compile Remove="FSystem.Common.Interfaces\Class1.cs" />
+    <Compile Remove="FSystem.Common.Interfaces\IInputService.cs" />
+    <Compile Remove="FSystem.Common.Interfaces\IOutputService.cs" />
+    <Compile Remove="FSystem.Common.Interfaces\IReader.cs" />
+    <Compile Remove="FSystem.Common.Interfaces\IRecord.cs" />
+    <Compile Remove="FSystem.Common.Interfaces\InputService.cs" />
+    <Compile Remove="FSystem.Common.Interfaces\obj\Debug\netstandard2.0\FSystem.Common.Interfaces.AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="FSystem.Common.Interfaces\bin\Debug\netstandard2.0\FSystem.Common.Interfaces.deps.json" />
+    <None Remove="FSystem.Common.Interfaces\obj\FSystem.Common.Interfaces.csproj.nuget.cache" />
+    <None Remove="FSystem.Common.Interfaces\obj\FSystem.Common.Interfaces.csproj.nuget.g.props" />
+    <None Remove="FSystem.Common.Interfaces\obj\FSystem.Common.Interfaces.csproj.nuget.g.targets" />
+    <None Remove="FSystem.Common.Interfaces\obj\project.assets.json" />
+    <None Remove="FSystem.Common.Interfaces\obj\Debug\netstandard2.0\FSystem.Common.Interfaces.AssemblyInfoInputs.cache" />
+    <None Remove="FSystem.Common.Interfaces\obj\Debug\netstandard2.0\FSystem.Common.Interfaces.assets.cache" />
+    <None Remove="FSystem.Common.Interfaces\obj\Debug\netstandard2.0\FSystem.Common.Interfaces.csproj.CoreCompileInputs.cache" />
+    <None Remove="FSystem.Common.Interfaces\obj\Debug\netstandard2.0\FSystem.Common.Interfaces.csproj.FileListAbsolute.txt" />
+    <None Remove="FSystem.Common.Interfaces\obj\Debug\netstandard2.0\FSystem.Common.Interfaces.dll" />
+    <None Remove="FSystem.Common.Interfaces\obj\Debug\netstandard2.0\FSystem.Common.Interfaces.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FSystem.Common.Interfaces\FSystem.Common.Interfaces.csproj" />
+  </ItemGroup>
+</Project>
