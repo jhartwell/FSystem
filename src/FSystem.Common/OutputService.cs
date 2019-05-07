@@ -18,20 +18,12 @@ namespace FSystem.Common
         /// <summary>
         /// Save the specified records to a given stream
         /// </summary>
+        /// <returns>A <see cref="string"/> that contains the saved, formatted records</returns>
         /// <param name="records">An <see cref="IEnumerable{IRecord}"/> containing the records
         /// to be saved.</param>
-        /// <param name="stream">A <see cref="Stream"/> that will be written too</param>
-        public void Save(IEnumerable<IRecord> records, Stream stream)
+        public string Save(IEnumerable<IRecord> records)
         {
-            var writer = new StreamWriter(stream);
-            writer.Write(outputFormatter.Format(records));
-            writer.Flush();
-            stream.Position = 0;
-        }
-
-        public void SortBy(string fieldName)
-        {
-            throw new NotImplementedException();
+            return outputFormatter.Format(records);
         }
     }
 }

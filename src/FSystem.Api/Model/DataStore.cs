@@ -1,25 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Text;
 
 namespace FSystem.Api.Model
 {
     public class DataStore : IDataStore
     {
-        private List<string> rawRecords;
+        private StringBuilder input;
 
         public DataStore()
         {
-            rawRecords = new List<string>();
+            input = new StringBuilder();
         }
 
         public void Add(string line)
         {
-            rawRecords.Add(line);
+            input.AppendLine(line);
         }
 
-        public IEnumerable<string> GetAll()
-        {
-            return rawRecords;
-        }
+        public string Data => input.ToString();
     }
 }

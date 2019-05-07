@@ -6,7 +6,6 @@ namespace FSystem.Common.Interfaces
 {
     public interface IOutputService
     {
-        void SortBy(string fieldName);
-        void Save(IEnumerable<IRecord> records, Stream stream);
+        string Save(IEnumerable<IRecord> records);
     }
 }

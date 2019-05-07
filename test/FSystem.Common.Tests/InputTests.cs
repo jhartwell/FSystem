@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using FSystem.Common.Interfaces;
+using FSystem.Tests.Shared;
 using Xunit;
 
 /*

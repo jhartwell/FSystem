@@ -6,6 +6,6 @@ namespace FSystem.Api.Model
     public interface IDataStore
     {
         void Add(string line);
-        IEnumerable<string> GetAll();
+        string Data { get; }
     }
 }

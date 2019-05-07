@@ -15,10 +15,8 @@ namespace FSystem.Common.Tests
         {
             var record = new Record("Toby", "Flenderson", "Male", "Black", "5/2/1972");
             var outputService = new OutputService(new JsonFormat());
-            var memoryStream = new MemoryStream();
-            outputService.Save(new List<IRecord> { record }, memoryStream);
-            var streamReader = new StreamReader(memoryStream);
-            var parsedOutput = JObject.Parse(streamReader.ReadToEnd());
+            var output = outputService.Save(new List<IRecord> { record });
+            var parsedOutput = JObject.Parse(output);
             var token = parsedOutput["items"].First;
             Assert.Equal(record.FirstName, token["FirstName"]);
             Assert.Equal(record.LastName, token["LastName"]);
@@ -38,10 +36,8 @@ namespace FSystem.Common.Tests
                 new Record("Jan", "Levinson", "Female", "Red", "10/2/1974")
             };
             var outputService = new OutputService(new JsonFormat());
-            var memoryStream = new MemoryStream();
-            outputService.Save(records, memoryStream);
-            var streamReader = new StreamReader(memoryStream);
-            var parsedOutput = JObject.Parse(streamReader.ReadToEnd());
+            var output = outputService.Save(records);
+            var parsedOutput = JObject.Parse(output);
             var items = parsedOutput["items"];
             int index = 0;
             foreach(var item in items)

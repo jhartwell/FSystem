@@ -4,11 +4,11 @@ using System.Text;
 using System.Linq;
 using System.IO;
 
-namespace FSystem.Common.Tests
+namespace FSystem.Tests.Shared
 {
     public class InputData
     {
-        IEnumerable<string[]> records;
+        private IEnumerable<string[]> records;
 
         public InputData()
         {
@@ -22,54 +22,45 @@ namespace FSystem.Common.Tests
             };
         }
 
-        private Stream ToStream(string recordText)
-        {
-            var stream = new MemoryStream();
-            var writer = new StreamWriter(stream);
-            writer.Write(recordText);
-            writer.Flush();
-            stream.Position = 0;
-            return stream;
-        }
 
-        private string SingleRecord(char delimiter)
+        private string SingleRecord(string delimiter)
         {
             return string.Join(delimiter, records.First());
         }
 
-        private string MultipleRecords(char delimiter)
+        private string MultipleRecords(string delimiter)
         {
-            return records.Aggregate(string.Empty, (recs, r) => recs + string.Join(delimiter, r) + Environment.NewLine);                           
+            return records.Aggregate(string.Empty, (recs, r) => recs + string.Join(delimiter, r) + Environment.NewLine);
         }
 
         public string SingleRecordCommaDelimited()
         {
-            return SingleRecord(',');
+            return SingleRecord(",");
         }
 
         public string MultipleRecordCommaDelimited()
         {
-            return MultipleRecords(',');
+            return MultipleRecords(",");
         }
 
         public string SingleRecordSpaceDelimited()
         {
-            return SingleRecord(' ');
+            return SingleRecord(" ");
         }
 
         public string MultipleRecordSpaceDelimited()
         {
-            return MultipleRecords(' ');
+            return MultipleRecords(" ");
         }
 
         public string SingleRecordPipeDelimited()
         {
-            return SingleRecord('|');
+            return SingleRecord("|");
         }
 
         public string MultipleRecordPipeDelimited()
         {
-            return MultipleRecords('|');
+            return MultipleRecords("|");
         }
     }
 }
