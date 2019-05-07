@@ -8,21 +8,19 @@ namespace FSystem.Common
 {
     public class OutputService : IOutputService
     {
-        private IEnumerable<IRecord> savedRecords;
         private IFormat outputFormatter;
 
-        public OutputService(IEnumerable<IRecord> records, IFormat formatter)
+        public OutputService(IFormat formatter)
         {
-            savedRecords = records;
             outputFormatter = formatter;
         }
 
-        public void Save(Stream stream)
+        public void Save(IEnumerable<IRecord> records, Stream stream)
         {
-            using (var writer = new StreamWriter(stream))
-            {
-                writer.Write(outputFormatter.Format(savedRecords));
-            }
+            var writer = new StreamWriter(stream);
+            writer.Write(outputFormatter.Format(records));
+            writer.Flush();
+            stream.Position = 0;
         }
 
         public void SortBy(string fieldName)

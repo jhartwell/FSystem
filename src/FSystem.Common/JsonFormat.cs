@@ -20,7 +20,7 @@ namespace FSystem.Common
         /// formatted.</typeparam>
         public string Format<T>(T value)
         {
-            return JsonConvert.SerializeObject(value);
+            return JsonConvert.SerializeObject(new { items = value });
         }
     }
 }

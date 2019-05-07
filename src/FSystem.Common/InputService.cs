@@ -35,6 +35,11 @@ namespace FSystem.Common
             return inputReader.Read(input, ',');
         }
 
+        public IEnumerable<IRecord> GetCommaDelimitedRecords(IEnumerable<string> input)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Reads the given <see cref="Stream"/> and will parse using a
         /// pipe as the delimiter
@@ -48,6 +53,11 @@ namespace FSystem.Common
             return inputReader.Read(input, '|');
         }
 
+        public IEnumerable<IRecord> GetPipeDelimitedRecords(IEnumerable<string> input)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Reads the given <see cref="Stream"/> and will parse using a
         /// space as the delimiter
@@ -59,6 +69,11 @@ namespace FSystem.Common
         public IEnumerable<IRecord> GetSpaceDelimitedRecords(Stream input)
         {
             return inputReader.Read(input, ' ');
+        }
+
+        public IEnumerable<IRecord> GetSpaceDelimitedRecords(IEnumerable<string> input)
+        {
+            throw new NotImplementedException();
         }
     }
 }
