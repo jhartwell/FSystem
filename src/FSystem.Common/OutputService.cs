@@ -15,6 +15,12 @@ namespace FSystem.Common
             outputFormatter = formatter;
         }
 
+        /// <summary>
+        /// Save the specified records to a given stream
+        /// </summary>
+        /// <param name="records">An <see cref="IEnumerable{IRecord}"/> containing the records
+        /// to be saved.</param>
+        /// <param name="stream">A <see cref="Stream"/> that will be written too</param>
         public void Save(IEnumerable<IRecord> records, Stream stream)
         {
             var writer = new StreamWriter(stream);

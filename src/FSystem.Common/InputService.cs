@@ -23,57 +23,42 @@ namespace FSystem.Common
         }
 
         /// <summary>
-        /// Reads the given <see cref="Stream"/> and will parse using a
-        /// comma as the delimiter
+        /// Converts the records from string format into a <see cref="IRecord"/>
+        /// by using a comma as the delimiter
         /// </summary>
         /// <returns>An <see cref="IEnumerable{IRecord}"/> that contains
         /// a <see cref="IRecord"/> for each line on the read stream.</returns>
-        /// <param name="input">A <see cref="Stream"/> that contains the 
-        /// underlying input data</param>
-        public IEnumerable<IRecord> GetCommaDelimitedRecords(Stream input)
+        /// <param name="input">A <see cref="string"/> that contains the 
+        /// underlying input data with each record separated by a newline</param>
+        public IEnumerable<IRecord> GetCommaDelimitedRecords(string input)
         {
-            return inputReader.Read(input, ',');
-        }
-
-        public IEnumerable<IRecord> GetCommaDelimitedRecords(IEnumerable<string> input)
-        {
-            throw new NotImplementedException();
+            return inputReader.Read(input.Trim().Split('\n'), ',');
         }
 
         /// <summary>
-        /// Reads the given <see cref="Stream"/> and will parse using a
-        /// pipe as the delimiter
+        /// Converts the records from string format into a <see cref="IRecord"/> by
+        /// using a pipe as a delimiter
         /// </summary>
         /// <returns>An <see cref="IEnumerable{IRecord}"/> that contains
         /// a <see cref="IRecord"/> for each line on the read stream.</returns>
-        /// <param name="input">A <see cref="Stream"/> that contains the 
-        /// underlying input data</param>
-        public IEnumerable<IRecord> GetPipeDelimitedRecords(Stream input)
+        /// <param name="input">A <see cref="string"/> that contains the 
+        /// underlying input data with each record separated by a newline
+        public IEnumerable<IRecord> GetPipeDelimitedRecords(string input)
         {
-            return inputReader.Read(input, '|');
-        }
-
-        public IEnumerable<IRecord> GetPipeDelimitedRecords(IEnumerable<string> input)
-        {
-            throw new NotImplementedException();
+            return inputReader.Read(input.Trim().Split('\n'), '|');
         }
 
         /// <summary>
-        /// Reads the given <see cref="Stream"/> and will parse using a
-        /// space as the delimiter
+        /// Converts the records from string format into a <see cref="IRecord"/> by
+        /// using a whitespace as the delimiter
         /// </summary>
         /// <returns>An <see cref="IEnumerable{IRecord}"/> that contains
         /// a <see cref="IRecord"/> for each line on the read stream.</returns>
-        /// <param name="input">A <see cref="Stream"/> that contains the 
-        /// underlying input data</param>
-        public IEnumerable<IRecord> GetSpaceDelimitedRecords(Stream input)
+        /// <param name="input">A <see cref="string"/> that contains the 
+        /// underlying input data with each record separated by a newline</param> 
+        public IEnumerable<IRecord> GetSpaceDelimitedRecords(string input)
         {
-            return inputReader.Read(input, ' ');
-        }
-
-        public IEnumerable<IRecord> GetSpaceDelimitedRecords(IEnumerable<string> input)
-        {
-            throw new NotImplementedException();
+            return inputReader.Read(input.Trim().Split('\n'), ' ');
         }
     }
 }

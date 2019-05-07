@@ -5,7 +5,7 @@ namespace FSystem.Api.Model
 {
     public class DataStore : IDataStore
     {
-        private IEnumerable<string> rawRecords;
+        private List<string> rawRecords;
 
         public DataStore()
         {

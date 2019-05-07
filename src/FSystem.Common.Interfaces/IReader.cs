@@ -6,6 +6,6 @@ namespace FSystem.Common.Interfaces
 {
     public interface IReader
     {
-        IEnumerable<IRecord> Read(Stream input, char deliminter);
+        IEnumerable<IRecord> Read(IEnumerable<string> input, char deliminter);
     }
 }

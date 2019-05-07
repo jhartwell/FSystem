@@ -42,37 +42,34 @@ namespace FSystem.Common.Tests
             return records.Aggregate(string.Empty, (recs, r) => recs + string.Join(delimiter, r) + Environment.NewLine);                           
         }
 
-        public (string, Stream) SingleRecordCommaDelimited()
+        public string SingleRecordCommaDelimited()
         {
-            var singleRecord = SingleRecord(',');
-            return (singleRecord, ToStream(singleRecord));
+            return SingleRecord(',');
         }
 
-        public (IEnumerable<string[]>, Stream) MultipleRecordCommaDelimited()
+        public string MultipleRecordCommaDelimited()
         {
-            return (records, ToStream(MultipleRecords(',')));
+            return MultipleRecords(',');
         }
 
-        public (string, Stream) SingleRecordSpaceDelimited()
+        public string SingleRecordSpaceDelimited()
         {
-            var singleRecord = SingleRecord(' ');
-            return (singleRecord, ToStream(SingleRecord(' ')));
+            return SingleRecord(' ');
         }
 
-        public (IEnumerable<string[]>, Stream) MultipleRecordSpaceDelimited()
+        public string MultipleRecordSpaceDelimited()
         {
-            return (records, ToStream(MultipleRecords(' ')));
+            return MultipleRecords(' ');
         }
 
-        public (string, Stream) SingleRecordPipeDelimited()
+        public string SingleRecordPipeDelimited()
         {
-            var singleRecord = SingleRecord('|');
-            return (singleRecord, ToStream(singleRecord));
+            return SingleRecord('|');
         }
 
-        public (IEnumerable<string[]>, Stream) MultipleRecordPipeDelimited()
+        public string MultipleRecordPipeDelimited()
         {
-            return (records, ToStream(MultipleRecords('|')));
+            return MultipleRecords('|');
         }
     }
 }

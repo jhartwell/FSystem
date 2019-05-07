@@ -22,16 +22,16 @@ namespace FSystem.Common.Tests
         [Fact]
         public void TestSingleCommaInput()
         {
-            var (rawString, stream) = inputData.SingleRecordCommaDelimited();
+            var raw = inputData.SingleRecordCommaDelimited();
             var inputService = new InputService(new Reader());
-            var records = inputService.GetCommaDelimitedRecords(stream);
+            var records = inputService.GetCommaDelimitedRecords(raw);
             Assert.NotNull(records);
             Assert.NotEmpty(records);
 
             var firstRecord = records.FirstOrDefault();
             Assert.NotNull(firstRecord);
 
-            var fields = rawString.Split(',');
+            var fields = raw.Split(',');
             Assert.Equal(expectedRecordFieldCount, fields.Length);
 
             Assert.Equal(fields[0], firstRecord.LastName);
@@ -45,22 +45,23 @@ namespace FSystem.Common.Tests
         [Fact]
         public void TestMultipleCommaDelimitedRecords()
         {
-            var (rawEntries, stream) = inputData.MultipleRecordCommaDelimited();
+            var raw = inputData.MultipleRecordCommaDelimited();
             var inputService = new InputService(new Reader());
-            var records = inputService.GetCommaDelimitedRecords(stream);
+            var records = inputService.GetCommaDelimitedRecords(raw);
             Assert.NotNull(records);
             Assert.NotEmpty(records);
 
-            Assert.Equal(rawEntries.Count(), records.Count());
-            for(int i= 0; i < rawEntries.Count(); i++)
+            var rawRecords = raw.Trim().Split('\n').Select(x => x.Split(','));
+            Assert.Equal(rawRecords.Count(), records.Count());
+            for(int i= 0; i < rawRecords.Count(); i++)
             {
                 var rec = records.ElementAt(i);
-                var raw = rawEntries.ElementAt(i);
-                Assert.Equal(raw[0], rec.LastName);
-                Assert.Equal(raw[1], rec.FirstName);
-                Assert.Equal(raw[2], rec.Gender);
-                Assert.Equal(raw[3], rec.FavoriteColor);
-                Assert.Equal(raw[4], rec.DateOfBirth);
+                var rawRecord = rawRecords.ElementAt(i);
+                Assert.Equal(rawRecord[0], rec.LastName);
+                Assert.Equal(rawRecord[1], rec.FirstName);
+                Assert.Equal(rawRecord[2], rec.Gender);
+                Assert.Equal(rawRecord[3], rec.FavoriteColor);
+                Assert.Equal(rawRecord[4], rec.DateOfBirth);
             }
         }
 
@@ -68,16 +69,16 @@ namespace FSystem.Common.Tests
         [Fact]
         public void TestSinglePipeInput()
         {
-            var (rawString, stream) = inputData.SingleRecordPipeDelimited();
+            var raw = inputData.SingleRecordPipeDelimited();
             var inputService = new InputService(new Reader());
-            var records = inputService.GetPipeDelimitedRecords(stream);
+            var records = inputService.GetPipeDelimitedRecords(raw);
             Assert.NotNull(records);
             Assert.NotEmpty(records);
 
             IRecord firstRecord = records.FirstOrDefault();
             Assert.NotNull(firstRecord);
 
-            var fields = rawString.Split('|');        
+            var fields = raw.Split('|');        
             Assert.Equal(expectedRecordFieldCount, fields.Length);
 
             Assert.Equal(fields[0], firstRecord.LastName);
@@ -90,37 +91,38 @@ namespace FSystem.Common.Tests
         [Fact]
         public void TestMultiplePipeDelimitedRecords()
         {
-            var (rawEntries, stream) = inputData.MultipleRecordPipeDelimited();
+            var raw = inputData.MultipleRecordPipeDelimited();
             var inputService = new InputService(new Reader());
-            var records = inputService.GetPipeDelimitedRecords(stream);
+            var records = inputService.GetPipeDelimitedRecords(raw);
             Assert.NotNull(records);
             Assert.NotEmpty(records);
 
-            Assert.Equal(rawEntries.Count(), records.Count());
-            for (int i = 0; i < rawEntries.Count(); i++)
+            var rawRecords = raw.Trim().Split('\n').Select(x => x.Split('|'));
+            Assert.Equal(rawRecords.Count(), records.Count());
+            for (int i = 0; i < rawRecords.Count(); i++)
             {
                 var rec = records.ElementAt(i);
-                var raw = rawEntries.ElementAt(i);
-                Assert.Equal(raw[0], rec.LastName);
-                Assert.Equal(raw[1], rec.FirstName);
-                Assert.Equal(raw[2], rec.Gender);
-                Assert.Equal(raw[3], rec.FavoriteColor);
-                Assert.Equal(raw[4], rec.DateOfBirth);
+                var rawRecord = rawRecords.ElementAt(i);
+                Assert.Equal(rawRecord[0], rec.LastName);
+                Assert.Equal(rawRecord[1], rec.FirstName);
+                Assert.Equal(rawRecord[2], rec.Gender);
+                Assert.Equal(rawRecord[3], rec.FavoriteColor);
+                Assert.Equal(rawRecord[4], rec.DateOfBirth);
             }
         }
         [Fact]
         public void TestSingleSpaceInput()
         {
-            var (rawString, stream) = inputData.SingleRecordSpaceDelimited();
+            var raw = inputData.SingleRecordSpaceDelimited();
             var inputService = new InputService(new Reader());
-            var records = inputService.GetSpaceDelimitedRecords(stream);
+            var records = inputService.GetSpaceDelimitedRecords(raw);
             Assert.NotNull(records);
             Assert.NotEmpty(records);
 
             var firstRecord = records.FirstOrDefault();
             Assert.NotNull(firstRecord);
 
-            var fields = rawString.Split(' ');
+            var fields = raw.Split(' ');
             Assert.Equal(expectedRecordFieldCount, fields.Length);
 
             Assert.Equal(fields[0], firstRecord.LastName);
@@ -133,22 +135,23 @@ namespace FSystem.Common.Tests
         [Fact]
         public void TestMultipleSpaceDelimitedRecords()
         {
-            var (rawEntries, stream) = inputData.MultipleRecordSpaceDelimited();
+            var raw = inputData.MultipleRecordSpaceDelimited();
             var inputService = new InputService(new Reader());
-            var records = inputService.GetSpaceDelimitedRecords(stream);
+            var records = inputService.GetSpaceDelimitedRecords(raw);
             Assert.NotNull(records);
             Assert.NotEmpty(records);
 
-            Assert.Equal(rawEntries.Count(), records.Count());
-            for (int i = 0; i < rawEntries.Count(); i++)
+            var rawRecords = raw.Trim().Split('\n').Select(x => x.Split(' '));
+            Assert.Equal(rawRecords.Count(), records.Count());
+            for (int i = 0; i < rawRecords.Count(); i++)
             {
                 var rec = records.ElementAt(i);
-                var raw = rawEntries.ElementAt(i);
-                Assert.Equal(raw[0], rec.LastName);
-                Assert.Equal(raw[1], rec.FirstName);
-                Assert.Equal(raw[2], rec.Gender);
-                Assert.Equal(raw[3], rec.FavoriteColor);
-                Assert.Equal(raw[4], rec.DateOfBirth);
+                var rawRecord = rawRecords.ElementAt(i);
+                Assert.Equal(rawRecord[0], rec.LastName);
+                Assert.Equal(rawRecord[1], rec.FirstName);
+                Assert.Equal(rawRecord[2], rec.Gender);
+                Assert.Equal(rawRecord[3], rec.FavoriteColor);
+                Assert.Equal(rawRecord[4], rec.DateOfBirth);
             }
         }
     }

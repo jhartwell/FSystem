@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FSystem.Api.Model;
+using FSystem.Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FSystem.Api.Controllers
@@ -17,7 +18,8 @@ namespace FSystem.Api.Controllers
         public ActionResult<IEnumerable<string>> Get([FromServices] IOutputService outputService, 
             [FromServices] IInputService inputService, [FromServices] IDataStore dataStore)
         {
-
+            //var memoryStream = new MemoryStream();
+            return new List<string> { "hi" };
         }
 
         // GET api/values/5
