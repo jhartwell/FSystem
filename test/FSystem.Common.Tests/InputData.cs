@@ -39,7 +39,7 @@ namespace FSystem.Common.Tests
 
         private string MultipleRecords(char delimiter)
         {
-            return records.Aggregate(string.Empty, (recs, r) => recs + Environment.NewLine + string.Join(delimiter, r));                           
+            return records.Aggregate(string.Empty, (recs, r) => recs + string.Join(delimiter, r) + Environment.NewLine);                           
         }
 
         public (string, Stream) SingleRecordCommaDelimited()
