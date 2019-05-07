@@ -32,7 +32,9 @@ namespace FSystem.Common
         /// underlying input data with each record separated by a newline</param>
         public IEnumerable<IRecord> GetCommaDelimitedRecords(string input)
         {
-            return inputReader.Read(input.Trim().Split('\n'), ',');
+            return input != string.Empty ?
+                inputReader.Read(input.Trim().Split('\n'), ',')
+                : new List<Record>();
         }
 
         /// <summary>
@@ -45,7 +47,9 @@ namespace FSystem.Common
         /// underlying input data with each record separated by a newline
         public IEnumerable<IRecord> GetPipeDelimitedRecords(string input)
         {
-            return inputReader.Read(input.Trim().Split('\n'), '|');
+            return input != string.Empty ?
+                inputReader.Read(input.Trim().Split('\n'), '|')
+                : new List<Record>();
         }
 
         /// <summary>
@@ -58,7 +62,9 @@ namespace FSystem.Common
         /// underlying input data with each record separated by a newline</param> 
         public IEnumerable<IRecord> GetSpaceDelimitedRecords(string input)
         {
-            return inputReader.Read(input.Trim().Split('\n'), ' ');
+            return input != string.Empty ?
+                inputReader.Read(input.Trim().Split('\n'), ' ')
+                : new List<Record>();
         }
     }
 }

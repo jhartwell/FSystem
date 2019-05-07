@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FSystem.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class RecordsController : Controller
     {
         private IInputService inputService;

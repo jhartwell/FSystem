@@ -21,6 +21,14 @@ namespace FSystem.Common.Tests
         }
 
         [Fact]
+        public void TestEmptyData()
+        {
+            var inputService = new InputService(new Reader());
+            Assert.Empty(inputService.GetCommaDelimitedRecords(string.Empty));
+            Assert.Empty(inputService.GetPipeDelimitedRecords(string.Empty));
+            Assert.Empty(inputService.GetSpaceDelimitedRecords(string.Empty));
+        }
+        [Fact]
         public void TestSingleCommaInput()
         {
             var raw = inputData.SingleRecordCommaDelimited();

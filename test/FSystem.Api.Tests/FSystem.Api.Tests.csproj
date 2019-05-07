@@ -10,11 +10,14 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
     <PackageReference Include="xunit" Version="2.4.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\FSystem.Common\FSystem.Common.csproj" />
-    <ProjectReference Include="..\..\src\FSystem.Common.Interfaces\FSystem.Common.Interfaces.csproj" />
+    <ProjectReference Include="..\..\src\FSystem.Api\FSystem.Api.csproj" />
     <ProjectReference Include="..\FSystem.Tests.Shared\FSystem.Tests.Shared.csproj" />
+    <ProjectReference Include="..\..\src\FSystem.Common.Interfaces\FSystem.Common.Interfaces.csproj" />
+    <ProjectReference Include="..\..\src\FSystem.Common\FSystem.Common.csproj" />
   </ItemGroup>
 </Project>

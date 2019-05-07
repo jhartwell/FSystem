@@ -38,7 +38,7 @@ namespace FSystem.Api
         {
             services.AddScoped(typeof(IFormat), typeof(JsonFormat));
             services.AddScoped(typeof(IInputService), typeof(InputService));
-            services.AddScoped(typeof(IOutputService), typeof(IOutputService));
+            services.AddScoped(typeof(IOutputService), typeof(OutputService));
             services.AddScoped(typeof(IReader), typeof(Reader));
             services.AddScoped(typeof(IRecord), typeof(Record));
             services.AddSingleton(typeof(IDataStore), typeof(DataStore));
