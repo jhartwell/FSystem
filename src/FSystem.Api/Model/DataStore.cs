@@ -1,22 +1,41 @@
 ﻿using System;
-using System.Text;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
+using FSystem.Common.Interfaces;
 
 namespace FSystem.Api.Model
 {
     public class DataStore : IDataStore
     {
-        private StringBuilder input;
+        private Dictionary<string, List<IRecord>> recordMap;
 
         public DataStore()
         {
-            input = new StringBuilder();
+            recordMap = new Dictionary<string, List<IRecord>>();
         }
 
-        public void Add(string line)
+        public void Add(string key, IRecord line)
         {
-            input.AppendLine(line);
+            if (!recordMap.ContainsKey(key))
+            {
+                recordMap[key] = new List<IRecord>();
+            }
+            recordMap[key].Add(line);
         }
 
-        public string Data => input.ToString();
+        public void Add(string key, IEnumerable<IRecord> lines)
+        {
+            if(!recordMap.ContainsKey(key))
+            {
+                recordMap[key] = new List<IRecord>();
+            }
+            recordMap[key].AddRange(lines);
+        }
+
+        public IEnumerable<IRecord> GetData(string key)
+        {
+            return recordMap[key] != null ? recordMap[key] : new List<IRecord>();
+        }
     }
 }

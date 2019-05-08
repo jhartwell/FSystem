@@ -44,7 +44,7 @@ namespace FSystem.Common
         /// <returns>An <see cref="IEnumerable{IRecord}"/> that contains
         /// a <see cref="IRecord"/> for each line on the read stream.</returns>
         /// <param name="input">A <see cref="string"/> that contains the 
-        /// underlying input data with each record separated by a newline
+        /// underlying input data with each record separated by a newline</param>
         public IEnumerable<IRecord> GetPipeDelimitedRecords(string input)
         {
             return input != string.Empty ?

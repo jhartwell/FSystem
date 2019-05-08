@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using FSystem.Api.Model;
 using FSystem.Common.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FSystem.Api.Controllers
@@ -11,6 +14,7 @@ namespace FSystem.Api.Controllers
     [Route("[controller]")]
     public class RecordsController : Controller
     {
+        private const string SystemKey = "SYSTEM";
         private IInputService inputService;
         private IOutputService outputService;
         private IDataStore dataStore;
@@ -25,14 +29,24 @@ namespace FSystem.Api.Controllers
         [HttpGet]
         public ActionResult<string> Index()
         {
-            var records = inputService.GetCommaDelimitedRecords(dataStore.Data);
-            return outputService.Save(records);
+            var key = GetKey(Request);
+            return outputService.Save(dataStore.GetData(key));
         }
 
+        private string GetKey(HttpRequest request)
+        {
+            var key = SystemKey;
+            if(request.Query.ContainsKey("session"))
+            {
+                key = request.Query["session"];
+            }
+            return key;
+        }
         [HttpGet("{sortBy}")]
         public ActionResult<string> Sorted(string sortBy)
         {
-            var records = inputService.GetCommaDelimitedRecords(dataStore.Data);
+            var key = GetKey(Request);
+            var records = dataStore.GetData(key);
             switch (sortBy.ToLower())
             {
                 case "gender":
@@ -47,11 +61,22 @@ namespace FSystem.Api.Controllers
             }
             return outputService.Save(records);
         }
-        // POST api/values
+
         [HttpPost]
-        public void Post(string value)
+        public async Task Post()
         {
-            dataStore.Add(value);
+            /*
+             * unfortunately ASP.NET Core Web API freaks out 
+             * when passing in plain text and using [FromBody] string value
+             * as a method parameter. We have to read the body manually
+             */
+            using (var reader = new StreamReader(Request.Body, Encoding.UTF8))
+            {
+                var body = await reader.ReadToEndAsync();
+                var records = inputService.GetCommaDelimitedRecords(body);
+                var key = GetKey(Request);
+                dataStore.Add(key, records);
+            }
         }
     }
 }
