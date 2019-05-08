@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 using FSystem.Common.Interfaces;
 
 namespace FSystem.Common
@@ -20,51 +21,21 @@ namespace FSystem.Common
         public InputService(IReader reader)
         {
             inputReader = reader;
+
         }
 
-        /// <summary>
-        /// Converts the records from string format into a <see cref="IRecord"/>
-        /// by using a comma as the delimiter
-        /// </summary>
-        /// <returns>An <see cref="IEnumerable{IRecord}"/> that contains
-        /// a <see cref="IRecord"/> for each line on the read stream.</returns>
-        /// <param name="input">A <see cref="string"/> that contains the 
-        /// underlying input data with each record separated by a newline</param>
-        public IEnumerable<IRecord> GetCommaDelimitedRecords(string input)
+        public IEnumerable<IRecord> GetRecords(string input)
         {
-            return input != string.Empty ?
-                inputReader.Read(input.Trim().Split('\n'), ',')
-                : new List<Record>();
-        }
-
-        /// <summary>
-        /// Converts the records from string format into a <see cref="IRecord"/> by
-        /// using a pipe as a delimiter
-        /// </summary>
-        /// <returns>An <see cref="IEnumerable{IRecord}"/> that contains
-        /// a <see cref="IRecord"/> for each line on the read stream.</returns>
-        /// <param name="input">A <see cref="string"/> that contains the 
-        /// underlying input data with each record separated by a newline</param>
-        public IEnumerable<IRecord> GetPipeDelimitedRecords(string input)
-        {
-            return input != string.Empty ?
-                inputReader.Read(input.Trim().Split('\n'), '|')
-                : new List<Record>();
-        }
-
-        /// <summary>
-        /// Converts the records from string format into a <see cref="IRecord"/> by
-        /// using a whitespace as the delimiter
-        /// </summary>
-        /// <returns>An <see cref="IEnumerable{IRecord}"/> that contains
-        /// a <see cref="IRecord"/> for each line on the read stream.</returns>
-        /// <param name="input">A <see cref="string"/> that contains the 
-        /// underlying input data with each record separated by a newline</param> 
-        public IEnumerable<IRecord> GetSpaceDelimitedRecords(string input)
-        {
-            return input != string.Empty ?
-                inputReader.Read(input.Trim().Split('\n'), ' ')
-                : new List<Record>();
+            var recordLines = new List<string>();
+            using (var stringReader = new StringReader(input))
+            {
+                string line;
+                while((line = stringReader.ReadLine()) != null)
+                {
+                    recordLines.Add(line);
+                }
+                return inputReader.Read(recordLines);
+            }
         }
     }
 }

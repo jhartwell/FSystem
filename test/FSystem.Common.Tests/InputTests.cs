@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using FSystem.Common.Interfaces;
 using FSystem.Tests.Shared;
 using Xunit;
@@ -20,20 +21,19 @@ namespace FSystem.Common.Tests
             inputData = new InputData();
         }
 
+
         [Fact]
         public void TestEmptyData()
         {
             var inputService = new InputService(new Reader());
-            Assert.Empty(inputService.GetCommaDelimitedRecords(string.Empty));
-            Assert.Empty(inputService.GetPipeDelimitedRecords(string.Empty));
-            Assert.Empty(inputService.GetSpaceDelimitedRecords(string.Empty));
+            Assert.Empty(inputService.GetRecords(string.Empty));
         }
         [Fact]
         public void TestSingleCommaInput()
         {
             var raw = inputData.SingleRecordCommaDelimited();
             var inputService = new InputService(new Reader());
-            var records = inputService.GetCommaDelimitedRecords(raw);
+            var records = inputService.GetRecords(raw);
             Assert.NotNull(records);
             Assert.NotEmpty(records);
 
@@ -56,7 +56,7 @@ namespace FSystem.Common.Tests
         {
             var raw = inputData.MultipleRecordCommaDelimited();
             var inputService = new InputService(new Reader());
-            var records = inputService.GetCommaDelimitedRecords(raw);
+            var records = inputService.GetRecords(raw);
             Assert.NotNull(records);
             Assert.NotEmpty(records);
 
@@ -80,7 +80,7 @@ namespace FSystem.Common.Tests
         {
             var raw = inputData.SingleRecordPipeDelimited();
             var inputService = new InputService(new Reader());
-            var records = inputService.GetPipeDelimitedRecords(raw);
+            var records = inputService.GetRecords(raw);
             Assert.NotNull(records);
             Assert.NotEmpty(records);
 
@@ -102,7 +102,7 @@ namespace FSystem.Common.Tests
         {
             var raw = inputData.MultipleRecordPipeDelimited();
             var inputService = new InputService(new Reader());
-            var records = inputService.GetPipeDelimitedRecords(raw);
+            var records = inputService.GetRecords(raw);
             Assert.NotNull(records);
             Assert.NotEmpty(records);
 

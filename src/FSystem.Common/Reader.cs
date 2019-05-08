@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using FSystem.Common.Interfaces;
 
 namespace FSystem.Common
@@ -11,6 +12,20 @@ namespace FSystem.Common
     /// </summary>
     public class Reader : IReader
     {
+        private Regex commaRegex;
+        private Regex spaceRegex;
+        private Regex pipeRegex;
+
+        private const string CommaRegexPattern = @"([^,]+),([^,]+),([^,]+),([^,]+),([^,]+)";
+        private const string PipeRegexPattern = @"([^|]+)|([^|]+)|([^|]+)|([^|]+)|([^|]+)";
+        private const string SpaceRegexPattern = @"([^\s]+)\s([^\s]+)\s([^\s]+)\s([^\s]+)\s([^\s]+)";
+
+        public Reader()
+        {
+            commaRegex = new Regex(CommaRegexPattern);
+            pipeRegex = new Regex(PipeRegexPattern);
+            spaceRegex = new Regex(SpaceRegexPattern);
+        }
         /// <summary>
         /// Converts an <see cref="IEnumerable{string}"/>  to an <see cref="IEnumerable{IRecord}"/>
         /// </summary>
@@ -21,13 +36,34 @@ namespace FSystem.Common
         /// </param>
         /// <param name="delimiter">A char that is used to delimite each line
         /// of input.</param>
-        public IEnumerable<IRecord> Read(IEnumerable<string> input, char delimiter)
+        public IEnumerable<IRecord> Read(IEnumerable<string> input)
         {
-            return input.Select(line =>
+            var records = new List<IRecord>();
+            foreach(var line in input)
             {
-                var fields = line.Split(delimiter);
-                return new Record(fields[1], fields[0], fields[2], fields[3], fields[4]);
-            }).ToList(); 
+                Match regexMatch = null;
+                if(commaRegex.IsMatch(line))
+                {
+                    regexMatch = commaRegex.Match(line);
+                } else if (spaceRegex.IsMatch(line))
+                {
+                    regexMatch = spaceRegex.Match(line);
+                } else if(pipeRegex.IsMatch(line))
+                {
+                    regexMatch = pipeRegex.Match(line);
+                }
+                if (regexMatch != null)
+                {
+                    var groups = regexMatch.Groups;
+                    records.Add(new Record(
+                        lastName: groups[2].Value,
+                        firstName: groups[3].Value,
+                        gender: groups[4].Value,
+                        favoriteColor: groups[5].Value,
+                        dateOfBirth: groups[6].Value));
+                }
+            }
+            return records;
         }
     }
 }

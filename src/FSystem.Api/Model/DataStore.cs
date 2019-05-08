@@ -35,7 +35,7 @@ namespace FSystem.Api.Model
 
         public IEnumerable<IRecord> GetData(string key)
         {
-            return recordMap[key] != null ? recordMap[key] : new List<IRecord>();
+            return recordMap.ContainsKey(key) ? recordMap[key] : new List<IRecord>();
         }
     }
 }

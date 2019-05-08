@@ -29,7 +29,7 @@ namespace FSystem.Api.Tests
             this.factory = factory;
         }
 
-        [Theory(Skip = "Unrelated")]
+        [Theory]
         [InlineData("/Records", "1")]
         public async Task GetEmptyIndex(string url, string session)
         {
@@ -42,8 +42,8 @@ namespace FSystem.Api.Tests
         }
 
         [Theory]
-        [InlineData("/Records", PipeRecord, "2")]
-        [InlineData("/Records", SpaceRecord, "3")]
+        //[InlineData("/Records", PipeRecord, "2")]
+        //[InlineData("/Records", SpaceRecord, "3")]
         [InlineData("/Records", CommaRecord, "4")]
         public async Task AddRecord(string url, string record, string session)
         {

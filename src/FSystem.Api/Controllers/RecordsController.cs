@@ -73,7 +73,7 @@ namespace FSystem.Api.Controllers
             using (var reader = new StreamReader(Request.Body, Encoding.UTF8))
             {
                 var body = await reader.ReadToEndAsync();
-                var records = inputService.GetCommaDelimitedRecords(body);
+                var records = inputService.GetRecords(body);
                 var key = GetKey(Request);
                 dataStore.Add(key, records);
             }
