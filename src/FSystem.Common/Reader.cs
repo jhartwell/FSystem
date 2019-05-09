@@ -82,7 +82,7 @@ namespace FSystem.Common
                         firstName: groups[2].Value,
                         gender: groups[3].Value,
                         favoriteColor: groups[4].Value,
-                        dateOfBirth: DateTime.Parse(groups[5].Value).ToString("m/d/YYYY")));
+                        dateOfBirth: DateTime.Parse(groups[5].Value).ToString("MM/dd/yyyy")));
                 }
             }
             return records;

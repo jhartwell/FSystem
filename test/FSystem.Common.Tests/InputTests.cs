@@ -47,7 +47,7 @@ namespace FSystem.Common.Tests
             Assert.Equal(fields[1], firstRecord.FirstName);
             Assert.Equal(fields[2], firstRecord.Gender);
             Assert.Equal(fields[3], firstRecord.FavoriteColor);
-            Assert.Equal(fields[4], firstRecord.DateOfBirth);
+            Assert.Equal(DateTime.Parse(fields[4]).ToString("MM/dd/yyyy"), firstRecord.DateOfBirth);
 
         }
 
@@ -70,7 +70,7 @@ namespace FSystem.Common.Tests
                 Assert.Equal(rawRecord[1], rec.FirstName);
                 Assert.Equal(rawRecord[2], rec.Gender);
                 Assert.Equal(rawRecord[3], rec.FavoriteColor);
-                Assert.Equal(rawRecord[4], rec.DateOfBirth);
+                Assert.Equal(DateTime.Parse(rawRecord[4]).ToString("MM/dd/yyyy"), rec.DateOfBirth);
             }
         }
 
@@ -94,7 +94,7 @@ namespace FSystem.Common.Tests
             Assert.Equal(fields[1], firstRecord.FirstName);
             Assert.Equal(fields[2], firstRecord.Gender);
             Assert.Equal(fields[3], firstRecord.FavoriteColor);
-            Assert.Equal(fields[4], firstRecord.DateOfBirth);
+            Assert.Equal(DateTime.Parse(fields[4]).ToString("MM/dd/yyyy"), firstRecord.DateOfBirth);
         }
 
         [Fact]
@@ -116,7 +116,7 @@ namespace FSystem.Common.Tests
                 Assert.Equal(rawRecord[1], rec.FirstName);
                 Assert.Equal(rawRecord[2], rec.Gender);
                 Assert.Equal(rawRecord[3], rec.FavoriteColor);
-                Assert.Equal(rawRecord[4], rec.DateOfBirth);
+                Assert.Equal(DateTime.Parse(rawRecord[4]).ToString("MM/dd/yyyy"), rec.DateOfBirth);
             }
         }
         [Fact]
@@ -138,7 +138,7 @@ namespace FSystem.Common.Tests
             Assert.Equal(fields[1], firstRecord.FirstName);
             Assert.Equal(fields[2], firstRecord.Gender);
             Assert.Equal(fields[3], firstRecord.FavoriteColor);
-            Assert.Equal(fields[4], firstRecord.DateOfBirth);
+            Assert.Equal(DateTime.Parse(fields[4]).ToString("MM/dd/yyyy"), firstRecord.DateOfBirth);
         }
 
         [Fact]
@@ -160,7 +160,7 @@ namespace FSystem.Common.Tests
                 Assert.Equal(rawRecord[1], rec.FirstName);
                 Assert.Equal(rawRecord[2], rec.Gender);
                 Assert.Equal(rawRecord[3], rec.FavoriteColor);
-                Assert.Equal(rawRecord[4], rec.DateOfBirth);
+                Assert.Equal(DateTime.Parse(rawRecord[4]).ToString("MM/dd/yyyy"), rec.DateOfBirth);
             }
         }
     }
