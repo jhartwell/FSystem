@@ -124,7 +124,7 @@ namespace FSystem.Common.Tests
         {
             var raw = inputData.SingleRecordSpaceDelimited();
             var inputService = new InputService(new Reader());
-            var records = inputService.GetSpaceDelimitedRecords(raw);
+            var records = inputService.GetRecords(raw);
             Assert.NotNull(records);
             Assert.NotEmpty(records);
 
@@ -146,7 +146,7 @@ namespace FSystem.Common.Tests
         {
             var raw = inputData.MultipleRecordSpaceDelimited();
             var inputService = new InputService(new Reader());
-            var records = inputService.GetSpaceDelimitedRecords(raw);
+            var records = inputService.GetRecords(raw);
             Assert.NotNull(records);
             Assert.NotEmpty(records);
 

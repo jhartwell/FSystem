@@ -64,7 +64,7 @@ namespace FSystem.Api.Tests
             var getResponse = await client.GetAsync($"{url}?session={session}");
             var inputService = new InputService(new Reader());
             var outputService = new OutputService(new JsonFormat());
-            var expectedRecords = inputService.GetCommaDelimitedRecords(record);
+            var expectedRecords = inputService.GetRecords(record);
             var expectedOutput = outputService.Save(expectedRecords);
 
             Assert.Equal(expectedOutput, await getResponse.Content.ReadAsStringAsync());
@@ -88,7 +88,7 @@ namespace FSystem.Api.Tests
 
             var actualOutput = await getResponse.Content.ReadAsStringAsync();
             var inputService = new InputService(new Reader());
-            var records = inputService.GetCommaDelimitedRecords(rawRecord);
+            var records = inputService.GetRecords(rawRecord);
             switch(sortBy)
             {
                 case "name":

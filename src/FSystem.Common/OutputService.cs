@@ -6,10 +6,18 @@ using FSystem.Common.Interfaces;
 
 namespace FSystem.Common
 {
+    /// <summary>
+    /// Concrete implementation of <see cref="IOutputService"/>
+    /// </summary>
     public class OutputService : IOutputService
     {
         private IFormat outputFormatter;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OutputService"/> class.
+        /// </summary>
+        /// <param name="formatter">An instance of <see cref="IFormat"/> that will
+        /// be used to format the output.</param>
         public OutputService(IFormat formatter)
         {
             outputFormatter = formatter;

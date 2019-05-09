@@ -33,7 +33,8 @@ namespace FSystem.Common.Tests
                 new Record("Toby", "Flenderson", "Male", "Black", "5/2/1972"),
                 new Record("Creed", "Bratton", "Male", "Purple", "5/2/1963"),
                 new Record("David", "Wallace", "Male", "Green", "9/2/1960"),
-                new Record("Jan", "Levinson", "Female", "Red", "10/2/1974")
+                new Record("Jan", "Levinson", "Female", "Red", "10/2/1974"),
+                new Record("Andy", "Bernard", "Male", "Gold", "7-23-1977")
             };
             var outputService = new OutputService(new JsonFormat());
             var output = outputService.Save(records);

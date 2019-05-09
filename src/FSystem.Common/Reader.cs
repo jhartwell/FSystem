@@ -16,9 +16,32 @@ namespace FSystem.Common
         private Regex spaceRegex;
         private Regex pipeRegex;
 
-        private const string CommaRegexPattern = @"([^,]+),([^,]+),([^,]+),([^,]+),([^,]+)";
-        private const string PipeRegexPattern = @"([^|]+)|([^|]+)|([^|]+)|([^|]+)|([^|]+)";
-        private const string SpaceRegexPattern = @"([^\s]+)\s([^\s]+)\s([^\s]+)\s([^\s]+)\s([^\s]+)";
+        /// <summary>
+        /// This regex will parse a line by ensuring that there is a comma
+        /// separating the 5 fields
+        /// Patterns:
+        ///   [^,]+ -> Matches one or more characters that is not a comma
+        ///   [,] -> Matches a single comma
+        /// </summary>
+        private const string CommaRegexPattern = @"([^,]+)[,]([^,]+)[,]([^,]+)[,]([^,]+)[,]([^,]+)";
+
+        /// <summary>
+        /// This regex will parse a line by ensuring that there is a pipe 
+        /// separating the 5 fields
+        /// Patterns:
+        ///    [^|]+ -> Matches one or more characters that are not pipes
+        ///    [|] -> Matches a single pipe
+        /// </summary>
+        private const string PipeRegexPattern = @"([^\s]+)[|]([^\s]+)[|]([^\s]+)[|]([^\s]+)[|]([^\s]+)";
+
+        /// <summary>
+        /// This regex will parse a line by ensuring that there is a space 
+        /// separating the 5 fields
+        /// Patterns:
+        ///    [^\s]+ -> Matches one or more characters that are not spaces
+        ///    [\s] -> Matches a single space
+        /// </summary>
+        private const string SpaceRegexPattern = @"([^\s]+)[\s]([^\s]+)[\s]([^\s]+)[\s]([^\s]+)[\s]([^\s]+)";
 
         public Reader()
         {
@@ -26,6 +49,7 @@ namespace FSystem.Common
             pipeRegex = new Regex(PipeRegexPattern);
             spaceRegex = new Regex(SpaceRegexPattern);
         }
+
         /// <summary>
         /// Converts an <see cref="IEnumerable{string}"/>  to an <see cref="IEnumerable{IRecord}"/>
         /// </summary>
@@ -34,8 +58,6 @@ namespace FSystem.Common
         /// stream</returns>
         /// <param name="input">An <see cref="IEnumerable{string}"/> that contains a single line
         /// </param>
-        /// <param name="delimiter">A char that is used to delimite each line
-        /// of input.</param>
         public IEnumerable<IRecord> Read(IEnumerable<string> input)
         {
             var records = new List<IRecord>();
@@ -56,11 +78,11 @@ namespace FSystem.Common
                 {
                     var groups = regexMatch.Groups;
                     records.Add(new Record(
-                        lastName: groups[2].Value,
-                        firstName: groups[3].Value,
-                        gender: groups[4].Value,
-                        favoriteColor: groups[5].Value,
-                        dateOfBirth: groups[6].Value));
+                        lastName: groups[1].Value,
+                        firstName: groups[2].Value,
+                        gender: groups[3].Value,
+                        favoriteColor: groups[4].Value,
+                        dateOfBirth: DateTime.Parse(groups[5].Value).ToString("m/d/YYYY")));
                 }
             }
             return records;

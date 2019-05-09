@@ -14,7 +14,7 @@ namespace FSystem.Common
         private IReader inputReader;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:FSystem.Common.InputService"/> class.
+        /// Initializes a new instance of the <see cref="InputService"/> class.
         /// </summary>
         /// <param name="reader">An implementation of <see cref="IReader"/> that
         /// is used to read any input given</param>
@@ -24,6 +24,13 @@ namespace FSystem.Common
 
         }
 
+        /// <summary>
+        /// Converts a given string input into an <see cref="IEnumerable{IRecord}"/>
+        /// </summary>
+        /// <returns>An <see cref="IEnumerable{IRecord}"/> with all of the records
+        /// that were parsed from the input string</returns>
+        /// <param name="input">A string that contains the raw records
+        /// to be parsed</param>
         public IEnumerable<IRecord> GetRecords(string input)
         {
             var recordLines = new List<string>();
